@@ -13,10 +13,12 @@ public class GeneticAlgorithm {
     private Crossover crossover = new Crossover();
     private Mutator mutator = new Mutator();
 
+    private static final int ELITISM_COUNT = 2;
+
 
     public GeneticAlgorithm(List<Individual> population) {
         createPairings(population);
-        if(Settings.ELITISM) {
+        if (Settings.ELITISM) {
             addElites(population);
         }
     }
@@ -26,13 +28,13 @@ public class GeneticAlgorithm {
     }
 
     //Create the children to be added to the new population.
-    private void createPairings(List<Individual> population){
+    private void createPairings(List<Individual> population) {
         int pairings = calcPairings();
 
-        for(int i = 0; i < pairings; i++) {
+        for (int i = 0; i < pairings; i++) {
             List<Individual> pair = pairSelector.tournamentSelector(population);
             List<Individual> pairChildren = crossover.uniformCrossover(pair);
-            for(Individual pairChild : pairChildren) {
+            for (Individual pairChild : pairChildren) {
                 children.add(mutator.mutate(pairChild));
             }
         }
@@ -42,7 +44,7 @@ public class GeneticAlgorithm {
     //This is dependant on Elitism, as to not increase the initial population size.
     private int calcPairings() {
         int pairings = Settings.POPULATION_SIZE / 2;
-        if(Settings.ELITISM) {
+        if (Settings.ELITISM) {
             pairings--;
         }
         return pairings;
@@ -51,6 +53,6 @@ public class GeneticAlgorithm {
     //Add, in this case, the two elites from the previous population to the new population.
     private void addElites(List<Individual> population) {
         Elitism elitism = new Elitism();
-        children.addAll(elitism.getHighestTwoElites(population));
+        children.addAll(elitism.getHighestXElites(population, ELITISM_COUNT));
     }
 }

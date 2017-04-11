@@ -10,7 +10,7 @@ public class Util {
 
     public double averageFitness(List<Individual> population) {
         double sum = 0;
-        for(Individual ind : population) {
+        for (Individual ind : population) {
             sum += ind.getFitness();
         }
         return (sum / Settings.POPULATION_SIZE);

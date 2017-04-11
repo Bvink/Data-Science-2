@@ -31,11 +31,67 @@ public class PairSelector {
     private List<Individual> createTournamentPool(List<Individual> population) {
         List<Individual> tournamentPool = new ArrayList<Individual>();
         Random rand = new Random();
-        for(int i = 0; i < Settings.TOURNAMENT_SIZE; i++) {
+        for (int i = 0; i < Settings.TOURNAMENT_SIZE; i++) {
             tournamentPool.add(population.get(rand.nextInt(Settings.POPULATION_SIZE)));
         }
         return tournamentPool;
     }
 
 
+
+
+    
+    //Perform Roulette selection.
+    //This is done by putting all the values on a "roulette wheel" after normalization.
+    //And the generating a random number to select a parent randomly from said "roulette wheel".
+    //The higher the fitness, the higher the chance to be selected.
+    public List<Individual> rouletteSelector(List<Individual> population) {
+        List<Individual> parents = new ArrayList<Individual>();
+
+        double normalizer = getNormalizationValue(population);
+        double sum = getNormalizedFitnessSum(population, normalizer);
+        parents.add(rouletteWinner(population, normalizer, randomDouble(sum)));
+        parents.add(rouletteWinner(population, normalizer, randomDouble(sum)));
+        return parents;
+    }
+
+    //Pick a winner, based on a randomly generated value, from a "roulette wheel".
+    public Individual rouletteWinner(List<Individual> population, double normalizer, double random) {
+        double partialSum = 0d;
+        for (Individual ind : population) {
+            partialSum += ind.getFitness() + normalizer;
+            if (partialSum >= random) {
+                return ind;
+            }
+        }
+        return null;
+    }
+
+    //Generate a random double.
+    private double randomDouble(double upperBound) {
+        Random rng = new Random();
+        return rng.nextDouble() * upperBound;
+    }
+
+    //Find the lowest fitness in the dataset.
+    private double getNormalizationValue(List<Individual> population) {
+        double lowestValue = Double.MAX_VALUE;
+
+        for (Individual ind : population) {
+            if (ind.getFitness() < lowestValue) {
+                lowestValue = ind.getFitness();
+            }
+        }
+
+        return Math.abs(lowestValue);
+    }
+
+    //Return the total of all normalized fitness.
+    private double getNormalizedFitnessSum(List<Individual> population, double normalizer) {
+        double sum = 0d;
+        for (Individual ind : population) {
+            sum += ind.getFitness() + normalizer;
+        }
+        return sum;
+    }
 }

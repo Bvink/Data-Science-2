@@ -13,7 +13,7 @@ public class Crossover {
     //Uniform crossover is performed by randomly taking bits from either parents.
     public List<Individual> uniformCrossover(List<Individual> parents) {
         Random rand = new Random();
-        if(rand.nextDouble() < Settings.CROSSOVER_RATE) {
+        if (rand.nextDouble() < Settings.CROSSOVER_RATE) {
             List<Individual> children = new ArrayList<Individual>();
             int[] parentOneDNA = parents.get(0).getDNA();
             int[] parentTwoDNA = parents.get(1).getDNA();

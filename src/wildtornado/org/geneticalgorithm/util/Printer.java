@@ -9,6 +9,7 @@ public class Printer {
     Util util = new Util();
 
     public void print(List<Individual> population) {
+        System.out.println("Genetic Algorithm:");
         printAverageFitness(population);
         printBestIndividual(population);
     }
@@ -21,8 +22,9 @@ public class Printer {
         Individual best = util.bestIndividual(population);
         System.out.println("The best individual has a fitness of: " + best.getFitness() + ", And a value of: " + best.getRealValue());
         System.out.print("Its DNA sequence is: ");
-        for(int i : best.getDNA()) {
+        for (int i : best.getDNA()) {
             System.out.print(i);
         }
+        System.out.println();
     }
 }

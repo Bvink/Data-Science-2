@@ -12,9 +12,9 @@ public class Mutator {
         Random rand = new Random();
         int[] DNA = ind.getDNA();
 
-        for(int i = 0; i < DNA.length; i++) {
-            if(rand.nextDouble() < Settings.MUTATION_RATE) {
-                DNA[i]= DNA[i]^1;
+        for (int i = 0; i < DNA.length; i++) {
+            if (rand.nextDouble() < Settings.MUTATION_RATE) {
+                DNA[i] = DNA[i] ^ 1;
             }
         }
         return new Individual(DNA);

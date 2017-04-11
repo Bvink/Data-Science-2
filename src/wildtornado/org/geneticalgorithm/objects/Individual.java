@@ -7,14 +7,14 @@ import java.util.Random;
 
 public class Individual implements Comparable {
 
-    private int[] DNA =  new int[Settings.DNA_SIZE];                                //Binary DNA sample of the individual.
+    private int[] DNA = new int[Settings.DNA_SIZE];                                //Binary DNA sample of the individual.
     private int realValue;                                                          //Decimal value of the individual.
     private double fitness;                                                         //Fitness of the individual, depends on the equation given in settings.
 
     public Individual(int... DNA) {
-        if(confirmDNA(DNA)) {
+        if (confirmDNA(DNA)) {
             this.DNA = DNA;
-        }  else {
+        } else {
             setDNA();
         }
         calcRealValue();
@@ -22,9 +22,9 @@ public class Individual implements Comparable {
     }
 
     private boolean confirmDNA(int[] DNA) {
-        if(DNA.length == Settings.DNA_SIZE) {
-            for(int i : DNA) {
-                if(i > 1 || i < 0) {
+        if (DNA.length == Settings.DNA_SIZE) {
+            for (int i : DNA) {
+                if (i > 1 || i < 0) {
                     return false;
                 }
             }
@@ -43,8 +43,8 @@ public class Individual implements Comparable {
     private void calcRealValue() {
         int[] DNA = getDNA();
         int realValue = 0;
-        for(int i = 0; i < DNA.length; i++) {
-            realValue += (DNA[i] * Math.pow(2, DNA.length-i-1));
+        for (int i = 0; i < DNA.length; i++) {
+            realValue += (DNA[i] * Math.pow(2, DNA.length - i - 1));
         }
         this.realValue = realValue;
     }
