@@ -29,6 +29,10 @@ public abstract class Forecast {
         return forecast.get(i);
     }
 
+    public int getForecastSize() {
+        return forecast.size();
+    }
+
     public void updateForecast(Double e) {
         this.forecast.add(e);
     }

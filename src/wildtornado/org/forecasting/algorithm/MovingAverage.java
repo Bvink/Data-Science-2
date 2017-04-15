@@ -6,7 +6,7 @@ public class MovingAverage {
 
     //Calculate the moving average given a data set and k.
     public double get(Forecast forecast, int k) {
-        double sum = 0.0;
+        double sum = 0d;
         int size = forecast.getDataSize();
 
         k = k <= size ? k : size;

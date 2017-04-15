@@ -40,7 +40,7 @@ public class PostProcessor {
     }
 
     public void print() {
-        System.out.println("K Means:");
+        System.out.println("Clustering:");
         System.out.println("Sum of Squared Errors: " + best.getSumOfSquaredErrors());
     }
 

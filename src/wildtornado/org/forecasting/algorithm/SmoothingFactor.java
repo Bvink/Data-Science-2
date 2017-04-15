@@ -2,6 +2,7 @@ package wildtornado.org.forecasting.algorithm;
 
 import wildtornado.org.forecasting.algorithm.smoothers.DoubleExponentialSmoother;
 import wildtornado.org.forecasting.algorithm.smoothers.SimpleExponentialSmoother;
+import wildtornado.org.forecasting.objects.DesForecast;
 import wildtornado.org.forecasting.objects.Forecast;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class SmoothingFactor {
         double bestAlpha = 0d;
         double lowestSesError = Double.MAX_VALUE;
 
-        for (double alpha = 0.005; alpha < 1; alpha += 0.005) {
+        for (double alpha = 0.01; alpha < 1; alpha += 0.01) {
             SimpleExponentialSmoother SES = new SimpleExponentialSmoother(data, alpha);
             SES.forecast(0);
             Forecast f = SES.getForecast();
@@ -32,13 +33,13 @@ public class SmoothingFactor {
         double bestBeta = 0d;
         double lowestDesError = Double.MAX_VALUE;
 
-        for (double alpha = 0.005; alpha < 1; alpha += 0.005) {
-            for (double beta = 0.005; alpha < 1; alpha += 0.005) {
+        for (double alpha = 0.01; alpha < 1; alpha += 0.01) {
+            for (double beta = 0.01; beta < 1; beta += 0.01) {
                 DoubleExponentialSmoother DES = new DoubleExponentialSmoother(data, alpha, beta);
                 DES.forecast(0);
-                Forecast f = DES.getForecast();
-                if (f.getError() < lowestDesError) {
-                    lowestDesError = f.getError();
+                DesForecast f = DES.getForecast();
+                if (f.getStandardError() < lowestDesError) {
+                    lowestDesError = f.getStandardError();
                     bestAlpha = alpha;
                     bestBeta = beta;
                 }
