@@ -43,4 +43,14 @@ public class DataSetParser {
         r.close();
     }
 
+    public List<Double> getValueList(int i) {
+        List<Double> valueList = new ArrayList<Double>();
+        for (Object[] row : data) {
+            valueList.add(Util.getVal(row[i]));
+        }
+        return valueList;
+    }
+
+
+
 }

@@ -1,16 +1,22 @@
 package wildtornado.org;
 
-import wildtornado.org.geneticalgorithm.GeneticAlgorithmAssignment;
-import wildtornado.org.kmeans.KMeansAssignment;
+import wildtornado.org.forecasting.Forecasting;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        GeneticAlgorithmAssignment ga = new GeneticAlgorithmAssignment();
-        ga.init();
 
-        KMeansAssignment kma = new KMeansAssignment();
-        kma.init();
+
+        /*
+        Genetic g = new Genetic();
+        g.init();
+
+        Clustering c = new Clustering();
+        c.init();
+        */
+
+        Forecasting f = new Forecasting();
+        f.init();
     }
 }
