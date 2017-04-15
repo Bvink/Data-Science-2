@@ -3,7 +3,7 @@ package wildtornado.org.forecasting.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DesForecast extends Forecast{
+public class DesForecast extends Forecast {
 
     private List<Double> smoothedSequence;
     private List<Double> trend;
@@ -36,6 +36,10 @@ public class DesForecast extends Forecast{
 
     public double getBeta() {
         return beta;
+    }
+
+    public void predict(int i) {
+
     }
 
 }

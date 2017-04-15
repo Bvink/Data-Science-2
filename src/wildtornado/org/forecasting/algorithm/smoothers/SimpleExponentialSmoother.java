@@ -7,32 +7,38 @@ import java.util.List;
 
 public class SimpleExponentialSmoother {
 
-    private SesForecast forecastSes;
+    private static final int MOVING_AVERAGE_K = 12;
+
+    private SesForecast sesForecast;
     private MovingAverage movingAverage = new MovingAverage();
 
     public SimpleExponentialSmoother(List<Double> data, double a) {
-        this.forecastSes = new SesForecast(data, a);
+        this.sesForecast = new SesForecast(data, a);
     }
 
+    //Execute the forecast by smoothing all the existing values,
+    //And then predicting the next values until upper bound has been reached.
     public void forecast(int upperBound) {
-        int size = forecastSes.getDataSize();
+        int size = sesForecast.getDataSize();
         for (int i = 0; i < size; i++) {
             if (i == 0) {
-                forecastSes.updateForecast(movingAverage.get(forecastSes, 12));
+                sesForecast.updateForecast(movingAverage.get(sesForecast, MOVING_AVERAGE_K));
                 continue;
             }
-            forecastSes.smoothen(i);
+            sesForecast.smoothen(i);
         }
         predict(size, upperBound);
     }
 
-    private void predict(int lowerbound, int upperbound) {
-        for (int i = lowerbound; i <= upperbound - 1; i++) {
-            forecastSes.predict(i);
+    //Predict the next values until the upper bound has been reached.
+    private void predict(int lowerBound, int upperBound) {
+        for (int i = lowerBound; i <= upperBound - 1; i++) {
+            sesForecast.predict(i);
         }
     }
 
+    //Return the forecast.
     public SesForecast getForecast() {
-        return forecastSes;
+        return sesForecast;
     }
 }

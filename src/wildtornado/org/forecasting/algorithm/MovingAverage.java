@@ -4,17 +4,17 @@ import wildtornado.org.forecasting.objects.Forecast;
 
 public class MovingAverage {
 
+    //Calculate the moving average given a data set and k.
     public double get(Forecast forecast, int k) {
+        double sum = 0.0;
+        int size = forecast.getDataSize();
 
-        if(k <= forecast.getDataSize()) {
-            double sum = 0.0;
-            for (int i = 0; i < k; i++) {
-                sum += forecast.getData(i);
-            }
+        k = k <= size ? k : size;
 
-            return sum / k;
+        for (int i = 0; i < k; i++) {
+            sum += forecast.getData(i);
         }
-        System.out.println("k cannot be bigger than the set size. ");
-        return 0;
+
+        return sum / k;
     }
 }

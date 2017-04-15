@@ -38,9 +38,6 @@ public class PairSelector {
     }
 
 
-
-
-
     //Perform Roulette selection.
     //This is done by putting all the values on a "roulette wheel" after normalization.
     //And the generating a random number to select a parent randomly from said "roulette wheel".

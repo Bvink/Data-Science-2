@@ -1,7 +1,7 @@
 package wildtornado.org.forecasting;
 
-import wildtornado.org.forecasting.algorithm.smoothers.SimpleExponentialSmoother;
 import wildtornado.org.forecasting.algorithm.SmoothingFactor;
+import wildtornado.org.forecasting.algorithm.smoothers.SimpleExponentialSmoother;
 import wildtornado.org.forecasting.objects.SesForecast;
 import wildtornado.org.util.DataSetParser;
 
@@ -19,10 +19,7 @@ public class Forecasting {
     public void init() {
         data = dataSetParser.getValueList(1);
 
-        SimpleExponentialSmoother SES = new SimpleExponentialSmoother(data, smoothingFactor.getBestSesSmoothingFactor(data));
-        SES.forecast(UPPERBOUND);
-
-        SesForecast forecast = SES.getForecast();
+        forecastSES();
     }
 
     private void forecastSES() {
@@ -30,6 +27,10 @@ public class Forecasting {
         SimpleExponentialSmoother SES = new SimpleExponentialSmoother(data, alpha);
         SES.forecast(UPPERBOUND);
         SesForecast forecast = SES.getForecast();
+    }
+
+    private void forecastDES() {
+        double[] factors = smoothingFactor.getBestDesSmoothingFactors(data);
     }
 
 }
