@@ -1,6 +1,6 @@
 package wildtornado.org.genetic.algorithm;
 
-import wildtornado.org.constants.Constants;
+import wildtornado.org.genetic.constants.Constants;
 import wildtornado.org.genetic.objects.Individual;
 import wildtornado.org.genetic.settings.Settings;
 import wildtornado.org.genetic.util.Util;

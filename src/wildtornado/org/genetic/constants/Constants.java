@@ -1,4 +1,4 @@
-package wildtornado.org.constants;
+package wildtornado.org.genetic.constants;
 
 public class Constants {
 

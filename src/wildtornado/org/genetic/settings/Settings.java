@@ -1,6 +1,6 @@
 package wildtornado.org.genetic.settings;
 
-import wildtornado.org.constants.Constants;
+import wildtornado.org.genetic.constants.Constants;
 
 public class Settings {
 
