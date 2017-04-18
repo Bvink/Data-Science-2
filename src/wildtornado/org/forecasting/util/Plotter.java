@@ -44,14 +44,14 @@ public class Plotter {
 
     private void displayOriginalData(DefaultCategoryDataset lineChart) {
         for (int i = 1; i <= data.size(); i++) {
-            lineChart.addValue(data.get(i-1), "Original Data", i + "");
+            lineChart.addValue(data.get(i - 1), "Original Data", i + "");
         }
     }
 
     private void displayData(DefaultCategoryDataset lineChart, Forecast forecast, String message) {
         int size = forecast.getForecastSize();
         for (int i = 1; i <= size; i++) {
-            lineChart.addValue(forecast.getForecast(i-1), message + " forecast", i + "");
+            lineChart.addValue(forecast.getForecast(i - 1), message + " Forecast", i + "");
         }
     }
 }

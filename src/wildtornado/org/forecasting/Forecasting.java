@@ -45,7 +45,7 @@ public class Forecasting {
         DES.forecast(UPPERBOUND);
         DesForecast forecast = DES.getForecast();
         System.out.println("DES Forecasting:");
-        System.out.println("Alpha: " + forecast.getAlpha()+ ", Beta: " + forecast.getBeta());
+        System.out.println("Alpha: " + forecast.getAlpha() + ", Beta: " + forecast.getBeta());
         System.out.println("Standard Error Value: " + forecast.getStandardError());
         return forecast;
     }

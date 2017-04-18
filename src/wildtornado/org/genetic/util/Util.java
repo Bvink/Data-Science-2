@@ -5,10 +5,11 @@ import wildtornado.org.genetic.settings.Settings;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Util {
 
-    public double averageFitness(List<Individual> population) {
+    public static double averageFitness(List<Individual> population) {
         double sum = 0;
         for (Individual ind : population) {
             sum += ind.getFitness();
@@ -16,9 +17,15 @@ public class Util {
         return (sum / Settings.POPULATION_SIZE);
     }
 
-    public Individual bestIndividual(List<Individual> population) {
+    public static Individual bestIndividual(List<Individual> population) {
         Collections.sort(population);
         return population.get(0);
+    }
+
+    //Generate a random double.
+    public static double randomDouble(double upperBound) {
+        Random rng = new Random();
+        return rng.nextDouble() * upperBound;
     }
 
 }

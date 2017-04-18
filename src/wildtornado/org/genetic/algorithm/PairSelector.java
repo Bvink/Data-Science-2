@@ -1,7 +1,9 @@
 package wildtornado.org.genetic.algorithm;
 
+import wildtornado.org.constants.Constants;
 import wildtornado.org.genetic.objects.Individual;
 import wildtornado.org.genetic.settings.Settings;
+import wildtornado.org.genetic.util.Util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,10 +12,22 @@ import java.util.Random;
 
 public class PairSelector {
 
+    public List<Individual> select(List<Individual> population) {
+        switch (Settings.SELECTION_METHOD) {
+            default:
+            case Constants.TOURNAMENT_SELECTION:
+                return tournamentSelector(population);
+            case Constants.ROULETTE_SELECTION:
+                return rouletteSelector(population);
+            case Constants.RANK_SELECTION:
+                return rankSelector(population);
+        }
+    }
+
     //Perform Tournament selection.
     //This is done by randomly picking a set amount of individuals from the population.
     //Then finding the best individual from that group and returning it.
-    public List<Individual> tournamentSelector(List<Individual> population) {
+    private List<Individual> tournamentSelector(List<Individual> population) {
         List<Individual> parents = new ArrayList<Individual>();
         parents.add(createTournament(createTournamentPool(population)));
         parents.add(createTournament(createTournamentPool(population)));
@@ -42,13 +56,13 @@ public class PairSelector {
     //This is done by putting all the values on a "roulette wheel" after normalization.
     //And the generating a random number to select a parent randomly from said "roulette wheel".
     //The higher the fitness, the higher the chance to be selected.
-    public List<Individual> rouletteSelector(List<Individual> population) {
+    private List<Individual> rouletteSelector(List<Individual> population) {
         List<Individual> parents = new ArrayList<Individual>();
 
         double normalizer = getNormalizationValue(population);
         double sum = getNormalizedFitnessSum(population, normalizer);
-        parents.add(rouletteWinner(population, normalizer, randomDouble(sum)));
-        parents.add(rouletteWinner(population, normalizer, randomDouble(sum)));
+        parents.add(rouletteWinner(population, normalizer, Util.randomDouble(sum)));
+        parents.add(rouletteWinner(population, normalizer, Util.randomDouble(sum)));
         return parents;
     }
 
@@ -62,12 +76,6 @@ public class PairSelector {
             }
         }
         return null;
-    }
-
-    //Generate a random double.
-    private double randomDouble(double upperBound) {
-        Random rng = new Random();
-        return rng.nextDouble() * upperBound;
     }
 
     //Find the lowest fitness in the dataset.
@@ -90,5 +98,12 @@ public class PairSelector {
             sum += ind.getFitness() + normalizer;
         }
         return sum;
+    }
+
+    //TODO: Perform rank selection.
+    private List<Individual> rankSelector(List<Individual> population) {
+        System.out.println("Rank selection has not been implemented yet");
+        System.exit(0);
+        return null;
     }
 }

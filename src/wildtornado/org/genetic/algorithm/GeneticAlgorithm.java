@@ -32,8 +32,8 @@ public class GeneticAlgorithm {
         int pairings = calcPairings();
 
         for (int i = 0; i < pairings; i++) {
-            List<Individual> pair = pairSelector.tournamentSelector(population);
-            List<Individual> pairChildren = crossover.uniformCrossover(pair);
+            List<Individual> pair = pairSelector.select(population);
+            List<Individual> pairChildren = crossover.crossover(pair);
             for (Individual pairChild : pairChildren) {
                 children.add(mutator.mutate(pairChild));
             }
